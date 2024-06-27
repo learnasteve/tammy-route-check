@@ -40,9 +40,9 @@ with gr.Blocks() as sub_demo:
     with gr.Row():
         gr.Markdown("""# <center><font size=8>{}</center>""".format("Sub demo Gradio app started!"))
 
-app = gr.mount_gradio_app(app, main_demo, path="/tammy/main")
+app = gr.mount_gradio_app(app, main_demo, path="/tammy/main", root_path="/tammy/main")
 
-app = gr.mount_gradio_app(app, sub_demo, path="/tammy/sub")
+app = gr.mount_gradio_app(app, sub_demo, path="/tammy/sub", root_path="/tammy/sub")
 
 if __name__ == '__main__':
     uvicorn.run(app, root_path="/tammy") # root_path seems to have no effect
