@@ -45,4 +45,4 @@ app = gr.mount_gradio_app(app, main_demo, path="/tammy/main")
 app = gr.mount_gradio_app(app, sub_demo, path="/tammy/sub")
 
 if __name__ == '__main__':
-    uvicorn.run(app) # root_path seems to have no effect
+    uvicorn.run(app, root_path="/tammy") # root_path seems to have no effect
