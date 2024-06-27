@@ -9,6 +9,18 @@ app = FastAPI()
 async def test(request: Request):
     return JSONResponse(content={"message": "Test Endpoint"})
 
+@app.get('/')
+async def test(request: Request):
+    return JSONResponse(content={"message": "Root Endpoint"}) # should conflict with main demo
+
+# @app.get('/tammy/sub')
+# async def test(request: Request):
+#     return JSONResponse(content={"message": "Sub Endpoint"})
+
+@app.get('/')
+async def test(request: Request):
+    return JSONResponse(content={"message": "Root Endpoint"}) # should conflict with main demo
+
 with gr.Blocks() as main_demo:
     with gr.Row():
         gr.Markdown("""# <center><font size=8>{}</center>""".format("Main demo Gradio app started!"))
@@ -18,9 +30,9 @@ with gr.Blocks() as sub_demo:
     with gr.Row():
         gr.Markdown("""# <center><font size=8>{}</center>""".format("Sub demo Gradio app started!"))
 
-app = gr.mount_gradio_app(app, main_demo, path="/tammy", root_path="/tammy")
+gr.mount_gradio_app(app, main_demo, path="/tammy", root_path="/tammy")
 
-app = gr.mount_gradio_app(app, sub_demo, path="/tammy/sub", root_path="/tammy")
+gr.mount_gradio_app(app, sub_demo, path="/tammy/sub", root_path="/tammy")
 
 if __name__ == '__main__':
-    uvicorn.run(app, root_path="/tammy")
+    uvicorn.run(app, root_path="/tammy") # root_path seems to have no effect
